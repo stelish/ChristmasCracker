@@ -1,0 +1,67 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    .well {
+        box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12);
+    }
+</style>
+<h4>Session Form:</h4>
+<div class="well bs-component">
+    <form class="form-group">
+        <fieldset>
+            <div class="form-group">
+                <label>Destination:</label>
+                <select class="form-control" ng-model="session.destination" ng-options="dest as dest.name for dest in airports track by dest.code" ng-change="updateAirports()">
+                    <option value="">Select a Destination IATA</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Origin 1:</label>
+                <select class="form-control" ng-model="session.origin1" ng-options="org1 as org1.name for org1 in airports track by org1.code" ng-change="updateAirports()">
+                    <option value="">Select a Origin 1</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Origin 2:</label>
+                <select class="form-control" ng-model="session.origin2" ng-options="org2 as org2.name for org2 in airports track by org2.code" ng-change="updateAirports()">
+                    <option value="">Select a Origin 2</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Joke 1:</label>
+                <input class="form-control" ng-model="session.joke1" placeholder="Enter first joke here" maxlength="150">
+                <!--<select class="form-control" ng-model="session.joke1" ng-options="joke1 as joke1.title for joke1 in jokes track by joke1.title">-->
+                    <!--<option value="">Select a first joke</option>-->
+                <!--</select>-->
+            </div>
+
+            <div class="form-group">
+                <label>Joke 2:</label>
+                <input class="form-control" ng-model="session.joke2" placeholder="Enter second joke here" maxlength="150">
+                <!--<select class="form-control" ng-model="session.joke2" ng-options="joke2 as joke2.title for joke2 in jokes track by joke2.title">-->
+                    <!--<option value="">Select a first joke</option>-->
+                <!--</select>-->
+            </div>
+
+            <div class="form-group" ng-init="initDatePicker()">
+                <input type="text" id="date-start" class="form-control floating-label" placeholder="Start Time" ng-model="session.startTime">
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="date-end" class="form-control floating-label" placeholder="End Time" ng-model="session.endTime">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ng-model="session.startMessage" placeholder="Start Message">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" ng-model="session.nextVotingMessage" placeholder="Next Voting Message">
+            </div>
+            <button type="submit" class="btn btn-info" ng-click="addSession(session)">{{ sessionUpdate ? 'Update' : 'Submit' }}</button>
+        </fieldset>
+    </form>
+</div>
+

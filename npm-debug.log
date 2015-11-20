@@ -1,0 +1,101 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   'C:\\Users\\kells4.ISIS\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '-g',
+1 verbose cli   'n' ]
+2 info using npm@3.3.5
+3 info using node@v0.10.32
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readGlobalPackageData
+7 silly fetchPackageMetaData n
+8 silly fetchNamedPackageData n
+9 silly mapToRegistry name n
+10 silly mapToRegistry using default registry
+11 silly mapToRegistry registry http://registry.npmjs.org/
+12 silly mapToRegistry uri http://registry.npmjs.org/n
+13 verbose request uri http://registry.npmjs.org/n
+14 verbose request no auth needed
+15 info attempt registry request try #1 at 15:03:38
+16 verbose request id 17a48e9ac124b896
+17 http request GET http://registry.npmjs.org/n
+18 http 200 http://registry.npmjs.org/n
+19 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+19 verbose headers   etag: '"4L7CF5ZWXLMK80HSPXTJA915V"',
+19 verbose headers   'content-type': 'application/json',
+19 verbose headers   'cache-control': 'max-age=60',
+19 verbose headers   'content-length': '52262',
+19 verbose headers   'accept-ranges': 'bytes',
+19 verbose headers   date: 'Mon, 02 Nov 2015 02:03:38 GMT',
+19 verbose headers   age: '0',
+19 verbose headers   'x-served-by': 'cache-akl6420-AKL',
+19 verbose headers   'x-cache': 'MISS, MISS from webproxy-ext.airnz.co.nz, MISS from icecrown.isis.airnz.co.nz',
+19 verbose headers   'x-cache-hits': '0',
+19 verbose headers   'x-timer': 'S1446429818.480351,VS0,VE164',
+19 verbose headers   vary: 'Accept',
+19 verbose headers   'x-cache-lookup': 'MISS from webproxy-ext.airnz.co.nz:3128',
+19 verbose headers   via: '1.1 varnish, 1.0 akl2gw918.airnz.co.nz (squid/3.1.10), 1.1 icecrown.isis.airnz.co.nz (squid/3.2.0.18)',
+19 verbose headers   connection: 'keep-alive' }
+20 silly get cb [ 200,
+20 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+20 silly get     etag: '"4L7CF5ZWXLMK80HSPXTJA915V"',
+20 silly get     'content-type': 'application/json',
+20 silly get     'cache-control': 'max-age=60',
+20 silly get     'content-length': '52262',
+20 silly get     'accept-ranges': 'bytes',
+20 silly get     date: 'Mon, 02 Nov 2015 02:03:38 GMT',
+20 silly get     age: '0',
+20 silly get     'x-served-by': 'cache-akl6420-AKL',
+20 silly get     'x-cache': 'MISS, MISS from webproxy-ext.airnz.co.nz, MISS from icecrown.isis.airnz.co.nz',
+20 silly get     'x-cache-hits': '0',
+20 silly get     'x-timer': 'S1446429818.480351,VS0,VE164',
+20 silly get     vary: 'Accept',
+20 silly get     'x-cache-lookup': 'MISS from webproxy-ext.airnz.co.nz:3128',
+20 silly get     via: '1.1 varnish, 1.0 akl2gw918.airnz.co.nz (squid/3.1.10), 1.1 icecrown.isis.airnz.co.nz (squid/3.2.0.18)',
+20 silly get     connection: 'keep-alive' } ]
+21 verbose get saving n to C:\Users\kells4.ISIS\AppData\Roaming\npm-cache\registry.npmjs.org\n\.cache.json
+22 verbose makeDirectory C:\Users\kells4.ISIS\AppData\Roaming\npm-cache creation not in flight; initializing
+23 verbose makeCacheDir UID & GID are irrelevant on win32
+24 silly install normalizeTree
+25 silly loadCurrentTree Finishing
+26 silly loadIdealTree Starting
+27 silly install loadIdealTree
+28 silly cloneCurrentTree Starting
+29 silly install cloneCurrentTreeToIdealTree
+30 silly cloneCurrentTree Finishing
+31 silly loadShrinkwrap Starting
+32 silly install loadShrinkwrap
+33 silly loadShrinkwrap Finishing
+34 silly loadAllDepsIntoIdealTree Starting
+35 silly install loadAllDepsIntoIdealTree
+36 silly rollbackFailedOptional Starting
+37 silly rollbackFailedOptional Finishing
+38 silly runTopLevelLifecycles Starting
+39 silly runTopLevelLifecycles Finishing
+40 silly install printInstalled
+41 verbose stack Error: Unsupported
+41 verbose stack     at checkPlatform (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\npm-install-checks\index.js:46:14)
+41 verbose stack     at Array.1 (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\bind-actor.js:15:8)
+41 verbose stack     at LOOP (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\chain.js:15:14)
+41 verbose stack     at C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\chain.js:18:7
+41 verbose stack     at checkEngine (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\npm-install-checks\index.js:25:10)
+41 verbose stack     at Array.0 (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\bind-actor.js:15:8)
+41 verbose stack     at LOOP (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\chain.js:15:14)
+41 verbose stack     at chain (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\chain.js:20:5)
+41 verbose stack     at module.exports.isInstallable (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\lib\install\validate-args.js:26:3)
+41 verbose stack     at Array.1 (C:\Users\kells4.ISIS\AppData\Roaming\npm\node_modules\npm\node_modules\slide\lib\bind-actor.js:15:8)
+42 verbose pkgid n@2.0.2
+43 verbose cwd C:\Users\kells4.ISIS\WebstormProjects\ChristmasCracker
+44 error Windows_NT 6.1.7601
+45 error argv "node" "C:\\Users\\kells4.ISIS\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "n"
+46 error node v0.10.32
+47 error npm  v3.3.5
+48 error code EBADPLATFORM
+49 error notsup Unsupported
+49 error notsup Not compatible with your operating system or architecture: n@2.0.2
+49 error notsup Valid OS:    !win32
+49 error notsup Valid Arch:  any
+49 error notsup Actual OS:   win32
+49 error notsup Actual Arch: x64
+50 verbose exit [ 1, true ]

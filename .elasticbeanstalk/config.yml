@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: christmascracker-env
+global:
+  application_name: ChristmasCracker
+  default_ec2_keyname: null
+  default_platform: 64bit Amazon Linux 2015.09 v2.0.4 running Node.js
+  default_region: ap-southeast-2
+  profile: eb-cli
+  sc: git
