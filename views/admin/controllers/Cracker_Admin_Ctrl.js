@@ -127,6 +127,7 @@ app.controller('CrackerAdminCtrl',['$scope','$http',function($scope,$http){
         } else {
             // remove previous
             $scope.removeSession(session.redisIndex).then(function(res){
+                console.log('addSession result: '+JSON.stringify(res));
                 //$scope.createSession(session);
             });
         }
@@ -177,6 +178,7 @@ app.controller('CrackerAdminCtrl',['$scope','$http',function($scope,$http){
 
     $scope.removeSessionFromTable = function(ind){
         $scope.removeSession(ind).then(function(res){
+            console.log('removeSession result: '+JSON.stringify(res));
             $scope.getAllSessions();
         });
     };

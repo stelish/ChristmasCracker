@@ -7,8 +7,8 @@ var app = express(); // the main app
 var path = require('path');
 var fs         = require("fs");
 
-var key_file   = "certs/server.key";
-var cert_file  = "certs/server.crt";
+var key_file   = "server/certs/server.key";
+var cert_file  = "server/certs/server.crt";
 
 var config     = {
     key: fs.readFileSync(key_file),
@@ -49,7 +49,7 @@ app.route('/client')
         console.log('Accessing the client section ...');
         console.log(app.path());
         res.type('.html');
-        res.sendFile(path.join(__dirname + '/../views/client/ChristmasCrackerClient.html'));
+        res.sendFile(path.join(__dirname + '/views/client/ChristmasCrackerClient.html'));
     });
 /**
  * Get's Main Admin Dashboard Page
@@ -60,7 +60,7 @@ app.route('/admin')
         console.log('Accessing the admin section ...');
         console.log(app.path());
         res.type('.html');
-        res.sendFile(path.join(__dirname + '/../views/admin/ChristmasCrackerAdmin.html'));
+        res.sendFile(path.join(__dirname + '/views/admin/ChristmasCrackerAdmin.html'));
     });
 /**
  * Serves API
@@ -253,7 +253,7 @@ app.route('/api/:call')
                     "origin1votes" : req.body.origin1votes,
                     "origin2votes" : req.body.origin2votes
                 };
-                console.log(JSON.stringify(session));
+                console.log('removeSession called: '+JSON.stringify(session));
                 var arr = [
                     "type:session",JSON.stringify(session)
                 ];
@@ -283,7 +283,7 @@ app.route('/api/:call')
  */
 app.route('/*')
     .get(function(req, res) {
-        res.sendFile(path.join(__dirname + '/../views/'+req.params[0]));
+        res.sendFile(path.join(__dirname + '/views/'+req.params[0]));
     });
 
 // Bind to port
