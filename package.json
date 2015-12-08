@@ -1,7 +1,6 @@
 {
-  "name": "server",
+  "name": "ChristmasCracker",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +9,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "express" : "*"
-  }
+    "body-parser": "*",
+    "express": "*",
+    "redis" : "*"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stelish/ChristmasCracker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/stelish/ChristmasCracker/issues"
+  },
+  "homepage": "https://github.com/stelish/ChristmasCracker#readme",
+  "description": ""
 }

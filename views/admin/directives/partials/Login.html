@@ -1,0 +1,63 @@
+<style>
+    #loginWrapper{
+        margin-top: 15%;
+    }
+    #loginInner{
+      width:400px;
+        margin: auto;
+    }
+
+    #loginBtn {
+      float:right;
+    }
+    .form-control{
+        min-width: 400px;
+    }
+    .material-icons-green{
+        color: #8BC34A;
+    }
+    .material-icons-red{
+        color: #FF5252;
+    }
+
+    .loginErrorTxt{
+        color: #FF5252;
+
+    }
+
+    .loginError {
+        background-image: linear-gradient(#FF5252, #FF5252), linear-gradient(#FF5252, #FF5252) !important;
+    }
+
+    .loginSuccess {
+        background-image: linear-gradient(#8BC34A, #8BC34A), linear-gradient(#8BC34A, #8BC34A) !important;
+    }
+
+</style>
+<div id="loginWrapper">
+    <div id="loginInner" style="">
+        <div id="inputHolder">
+            <form class="form-group" ng-submit="login()">
+                <div class="form-group">
+                    <div style="display:inline-flex">
+                        <input class="form-control" ng-class="{loginError: loginUsernameError, loginSuccess: loginUsernameSuccess }" ng-model="auth.username" placeholder="username"><i ng-if="loginUsernameError" class="material-icons material-icons-red">error</i><i ng-if="loginUsernameSuccess" class="material-icons material-icons-green">check_circle</i>
+                    </div>
+                    <small class="loginErrorTxt" ng-if="loginUsernameError">Username Incorrect</small>
+                </div>
+
+                <div class="form-group">
+                    <div style="display:inline-flex">
+                        <input class="form-control" ng-class="{loginError: loginPasswordError, loginSuccess: loginPasswordSuccess }" ng-model="auth.password" placeholder="password" type="password" ng-enter="login()"><i ng-if="loginPasswordError" class="material-icons material-icons-red">error</i><i ng-if="loginPasswordSuccess" class="material-icons material-icons-green">check_circle</i>
+                    </div>
+                    <small class="loginErrorTxt" ng-if="loginPasswordError">Username Password</small>
+                </div>
+            </form>
+        </div>
+      <div>
+          <span>forgot <b>password?</b></span>
+          <button id="loginBtn" type="button" class="btn btn-info" ng-click="login()">Login</button>
+      </div>
+
+    </div>
+
+</div>

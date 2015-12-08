@@ -3,6 +3,9 @@
  */
 var app = angular.module('app',['chart.js','ngCookies']);
 
+var dev_only = false;
+var serverUrl = dev_only ? 'https://localhost' : 'https://promo.grabaseat.co.nz';
+
 Chart.defaults.global.colours = [
     '#00B8D4', // blue
     '#5D4037', // light grey
@@ -12,3 +15,10 @@ Chart.defaults.global.colours = [
     '#949FB1', // grey
     '#4D5360'  // dark grey
 ];
+
+// initialiser for FastClick which removes the 300ms delay from mobile browsers on click events
+if(window.addEventListener){
+    window.addEventListener('load', function () {
+        FastClick.attach(document.body);
+    }, false);
+}

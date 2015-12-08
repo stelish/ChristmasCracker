@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="col-md-6 toast-details">
-                        <span>{{currentSession.origin1votes}}</span><br>
+                        <span>{{currentSession.origin1VoteCount}}</span><br>
                         <small>{{currentSession.origin1.name}}</small>
                         <p>Total current votes for this region.</p>
                     </div>
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="col-md-6 toast-details">
-                        <span>{{currentSession.origin2votes}}</span><br>
+                        <span>{{currentSession.origin2VoteCount}}</span><br>
                         <small>{{currentSession.origin2.name}}</small>
                         <p>Total current votes for this region.</p>
                     </div>
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="col-md-6 toast-details">
-                        <span>1014</span><br>
+                        <span>{{totalVotes}}</span><br>
                         <small>Total Votes</small>
                         <p>Total votes so far in this campaign.</p>
                     </div>
@@ -150,8 +150,8 @@
                     </div>
 
                     <div class="col-md-6 toast-details">
-                        <span>6506</span><br>
-                        <small>Origin 2</small>
+                        <span>{{highestVotingOrigin.total}}</span><br>
+                        <small>{{highestVotingOrigin.name}}</small>
                         <p>Highest voting city to date.</p>
                     </div>
                 </div>

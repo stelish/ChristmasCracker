@@ -26,6 +26,8 @@ app.directive('confetti',[function(){
             });
 
             function init() {
+                W = canvas.offsetWidth;
+                H = canvas.offsetHeight;
                 canvas.width = W;
                 canvas.height = H;
                 for(var i = 0; i < mp; i++)

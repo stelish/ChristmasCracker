@@ -7,7 +7,9 @@
         <title>Cracker Admin</title>
         <link rel="stylesheet" href="../vendor/bootstrap-3.3.5-dist/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/roboto.min.css">
+        <!-- Material Design fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/material-fullpalette.css">
         <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/ripples.min.css">
         <link rel="stylesheet" href="../vendor/angular-charts/angular-chart.min.css">
@@ -36,6 +38,26 @@
                 margin-top: 20px;
             }
 
+            .well {
+                box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.12), 0 1px 6px 0 rgba(0, 0, 0, 0.12) !important;
+            }
+
+            .line-legend{
+                overflow: hidden;
+                max-height: 20px;
+            }
+
+            .line-legend li {
+                padding: 0px 10px 0px 12px;
+                font-size: 9px;
+            }
+
+            .line-legend li span {
+                width: 10px !important;
+                height: 10px !important;
+                border-radius: 0 !important;
+            }
+
         </style>
     </head>
     <body ng-controller="CrackerAdminCtrl" role="document">
@@ -47,10 +69,14 @@
         </nav>
 
         <div class="container" role="main">
-            <div class="top">
+            <div class="col-md-12" ng-if="showLogin">
+                <ng-include src="'admin/directives/partials/Login.html'"></ng-include>
+            </div>
+
+            <div class="top" ng-if="!showLogin">
                 <ng-include  src="'admin/directives/partials/Dashboard.html'"></ng-include>
             </div>
-            <div id="bottom" class="col-md-12 bottom">
+            <div id="bottom" class="col-md-12 bottom" ng-if="!showLogin">
                 <!-- Dash Board -->
                 <div class="col-md-6">
                     <ng-include  src="'admin/directives/partials/SessionTable.html'"></ng-include>
@@ -77,6 +103,7 @@
         <script src="../vendor/angular-charts/angular-chart.min.js"></script>
         <script src="../vendor/bootstrap-material-datetimepicker-gh-pages/js/moment-with-locales.min.js"></script>
         <script src="../vendor/bootstrap-material-datetimepicker-gh-pages/js/bootstrap-material-datetimepicker.js"></script>
+        <script src="../vendor/fastclick-master/lib/fastclick.js"></script>
         <script src="../app.js"></script>
         <script src="admin/controllers/Cracker_Admin_Ctrl.js"></script>
     </body>

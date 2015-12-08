@@ -10,1132 +10,178 @@
     <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/roboto.min.css">
     <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/material-fullpalette.css">
     <link rel="stylesheet" href="../vendor/bootstrap-material-design-master/dist/css/ripples.min.css">
-    <style>
-        body {
-            max-height: 300px;
-            max-width: 1140px;
-            margin: 0 auto;
-            background-color: black;
-            overflow: hidden;
-            background: url(../img/background-desktop@2x.png) no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-        #ccwrapper{
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-
-        }
-
-        /** slide in transitions **/
-        .cctrans {
-            transition: all 0.8s ease-out;
-            -webkit-transition: all 0.8s ease-out;
-            -o-transition: all 0.8s ease-out;
-            -moz-transition: all 0.8s ease-out;
-        }
-
-        .ccout #ccdiv{
-            transform: translate3d(0, -450px, 0);
-            -moz-transform: translate3d(0, -450px, 0);
-            -webkit-transform: translate3d(0, -450px, 0);
-            -ms-transform: translate3d(0, -450px, 0);
-            -o-transform: translate3d(0, -450px, 0);
-        }
-
-        .ccin #ccdiv, .ccCenterCracker #ccdiv{
-            transform: translate3d(-80px, -50px, 0);
-            -moz-transform: translate3d(-80px, -50px, 0);
-            -webkit-transform: translate3d(-80px, -50px, 0);
-            -ms-transform: translate3d(-80px, -50px, 0);
-            -o-transform: translate3d(-80px, -50px, 0);
-        }
-
-        .ccout-right-btn{
-            transform: translate3d(0, 300px, 0);
-            -moz-transform: translate3d(0, 300px, 0);
-            -webkit-transform: translate3d(0, 300px, 0);
-            -ms-transform: translate3d(0, 300px, 0);
-            -o-transform: translate3d(0, 300px, 0);
-        }
-
-        .ccin-right-btn{
-            transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            -ms-transform: translate3d(0, 0, 0);
-            -o-transform: translate3d(0, 0, 0);
-        }
-
-        .ccout-left-btn{
-            transform: translate3d(0, -250px, 0);
-            -moz-transform: translate3d(0, -250px, 0);
-            -webkit-transform: translate3d(0, -250px, 0);
-            -ms-transform: translate3d(0, -250px, 0);
-            -o-transform: translate3d(0, -250px, 0);
-        }
-
-        .ccin-left-btn{
-            transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            -ms-transform: translate3d(0, 0, 0);
-            -o-transform: translate3d(0, 0, 0);
-        }
-
-        .ccopen{
-            position:absolute;
-        }
-
-
-        .ccleftcrackeropen {
-            transform: translate3d(-55px, -20px, 0);
-            -moz-transform: translate3d(-55px, -20px, 0);
-            -webkit-transform: translate3d(-55px, -20px, 0);
-            -ms-transform: translate3d(-55px, -20px, 0);
-            -o-transform: translate3d(-55px, -20px, 0);
-        }
-
-        .ccleftcrackerend {
-            transform: translate3d(-80px, 20px, 0);
-            -moz-transform: translate3d(-80px, 80px, 0);
-            -webkit-transform: translate3d(-80px, 80px, 0);
-            -ms-transform: translate3d(-80px, 80px, 0);
-            -o-transform: translate3d(-80px, 80px, 0);
-        }
-
-        .ccleftcrackerend img {
-            transform: rotate(-30deg);
-        }
-
-        .ccrightcrackeropen {
-            transform: translate3d(420px, -11px, 0);
-            -moz-transform: translate3d(420px, -11px, 0);
-            -webkit-transform: translate3d(420px, -11px, 0);
-            -ms-transform: translate3d(420px, -11px, 0);
-            -o-transform: translate3d(420px, -11px, 0);
-        }
-
-        .ccrightcrackeropen img {
-            transform: rotate(4deg);
-        }
-
-        .ccrightcrackerend {
-            transform: translate3d(800px, 165px, 0);
-            -moz-transform: translate3d(800px, 165px, 0);
-            -webkit-transform: translate3d(800px, 165px, 0);
-            -ms-transform: translate3d(800px, 165px, 0);
-            -o-transform: translate3d(800px, 165px, 0);
-        }
-        .ccrightcrackerend img{
-            transform: rotate(35deg);
-        }
-
-
-        /*** End of transition effects ***/
-
-        #ccimg{
-            margin: 0 auto;
-        }
-
-
-        #cccdlabel{
-            position: absolute;
-            top: 105px;
-            height: 40px;
-            width: 200px;
-            left: 43.5%;
-        }
-        .ccactionbtn{
-            /*border: solid 2px white;*/
-            position: absolute;
-            background-color:rgba(114, 191, 68, 0.9);
-            width: 150px;
-            height: 150px;
-            z-index: 1001;
-            color: white;
-        }
-        #ccleftbtn{
-            border-top-right-radius: 50%;
-            border-bottom-left-radius: 50%;
-            border-bottom-right-radius: 50%;
-            top: 15px;
-            left: 15px;
-        }
-
-        #ccrightbtn{
-            border-top-left-radius: 50%;
-            border-bottom-left-radius: 50%;
-            border-top-right-radius: 50%;
-            bottom: 15px;
-            right: 15px;
-        }
-
-        .cclefthandinner{
-            margin-top: -230px;
-            margin-left: -3px;
-        }
-
-        .ccrighthandinner{
-            width: 300px;
-            margin-top: 0;
-            margin-left: 0;
-        }
-
-        .cccrackerinner{
-            transform: rotate(5deg);
-        }
-
-
-        #ccleftbtn div, #ccrightbtn div {
-            margin-top: 25px;
-            margin-left: 0;
-        }
-
-        #ccleftbtn .ccvotetext, #ccrightbtn .ccvotetext {
-            margin: 0;
-            width:140px;
-            text-align: center;
-        }
-
-        .cciatatext {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        #ccoverlaywrapper{
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1200;
-            width: 100%;
-            height: 100%;
-        }
-
-        #ccleftoverlay, #ccrightoverlay{
-            width: 50%;
-            height: 100%;
-            float: left;
-        }
-
-        #ccleftoverlay:hover, #ccrightoverlay:hover {
-            -moz-box-shadow:    inset 0 0 20px #000000;
-            -webkit-box-shadow: inset 0 0 20px #000000;
-            box-shadow:         inset 0 0 20px #000000;
-        }
-
-        .ccleftgrow{
-            width: 175px;
-            height: 175px;
-            border: solid 4px rgba(114, 191, 68, 0.9);
-            background-color: white;
-            color: rgba(114, 191, 68, 0.9);
-            transition: all 0.3s ease-out;
-            -webkit-transition: all 0.3s ease-out;
-            -o-transition: all 0.3s ease-out;
-            -moz-transition: all 0.3s ease-out;
-        }
-
-        .ccrightgrow{
-            width: 175px;
-            height: 175px;
-            border: solid 4px rgba(114, 191, 68, 0.9);
-            background-color: white;
-            color: rgba(114, 191, 68, 0.9);
-            transition: all 0.3s ease-out;
-            -webkit-transition: all 0.3s ease-out;
-            -o-transition: all 0.3s ease-out;
-            -moz-transition: all 0.3s ease-out;
-        }
-
-        #ccjokewrapper{
-            position: absolute;
-            overflow: hidden;
-            height: 170px;
-            padding: 15px 25px;
-            text-align: left;
-            transform: translate3d(455px, 20px, 0);
-            -moz-transform: translate3d(455px, 20px, 0);
-            -webkit-transform: translate3d(455px, 20px, 0);
-            -ms-transform: translate3d(455px, 20px, 0);
-            -o-transform: translate3d(455px, 20px, 0);
-        }
-
-        .ccjokeleft {
-            background-color: #eee;
-            position: absolute;
-            left: 0;
-            top: 40px;
-            width: 100px;
-            height: 90px;
-            -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.4);
-            -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.4);
-
-        }
-
-        .ccjokediv{
-            position: absolute;
-            left: 90px;
-            top: 50px;
-            padding: 10px 20px;
-            width: 350px;
-            height: 120px;
-        }
-
-        .ccjokeright{
-            background-color: #fff;
-            position: absolute;
-            left: 560px;
-            top: 0;
-            width: 100px;
-            height: 90px;
-            -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-            -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), inset 0 0 50px rgba(0, 0, 0, 0.2);
-        }
-
-        /*.ccjokediv:after {*/
-            /*content: ' ';*/
-            /*position: absolute;*/
-            /*width: 0;*/
-            /*height: 0;*/
-            /*left: 0;*/
-            /*top: 100%;*/
-            /*border-width: 10px 10px;*/
-            /*border-style: solid;*/
-            /*border-color: #999 #999 transparent transparent;*/
-        /*}*/
-
-        .ccjokeright:after {
-            content: ' ';
-            position: absolute;
-            width: 0;
-            height: 0;
-            left: 0;
-            top: 100%;
-            border-width: 10px 10px;
-            border-style: solid;
-            border-color: #999 #999 transparent transparent;
-        }
-
-        .cccirclebadge {
-            text-align: center;
-            background-color: black;
-            border-radius: 50%;
-            border: solid 3px white;
-            width: 65px;
-            height: 65px;
-            margin: 0 auto;
-            margin-top: 13px;
-        }
-
-        .cccirclebadge p {
-            font-size: 30px;
-            margin-top: 5px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: -10px !important;
-        }
-
-        .cccirclebadge small {
-            font-size: 11px;
-            color: rgba(114, 191, 68, 0.9);
-        }
-
-
-        .ccjokestart{
-            max-width: 0;
-            width: 0;
-            padding: 0 !important;
-        }
-
-        .ccjokeend{
-            max-width: 850px;
-            width: 850px;
-        }
-
-        .ccjokestart p {
-            display: none;
-        }
-
-        .ccjokeend p{
-            display: block;
-            font-family: Georgia, Palatino, 'Palatino Linotype', serif;
-            font-weight: bold;
-        }
-
-        .ccconfettiwrapper {
-            position: absolute;
-            width: 100%;
-            height: 300px;
-            transform: translate3d(0, 0, 0);
-            -moz-transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            -ms-transform: translate3d(0, 0, 0);
-            -o-transform: translate3d(0, 0, 0);
-            overflow: hidden;
-        }
-
-        .cctransfast{
-            transition: all 0.6s ease-out;
-            -webkit-transition: all 0.6s ease-out;
-            -o-transition: all 0.6s ease-out;
-            -moz-transition: all 0.6s ease-out;
-        }
-
-        .cctransslow{
-            transition: all 1.4s ease-out;
-            -webkit-transition: all 1.4s ease-out;
-            -o-transition: all 1.4s ease-out;
-            -moz-transition: all 1.4s ease-out;
-        }
-
-        .cctranvisibility{
-            -webkit-transition: opacity 0.4s ease-in-out;
-            -moz-transition: opacity 0.4s ease-in-out;
-            -ms-transition: opacity 0.4s ease-in-out;
-            -o-transition: opacity 0.4s ease-in-out;
-            transition: opacity 0.4s ease-in-out;
-        }
-
-        .ccwinnerbtn{
-            position: absolute;
-            border-top-right-radius: 50%;
-            border-bottom-left-radius: 50%;
-            border-bottom-right-radius: 50%;
-            top: 15px;
-            left: 15px;
-            background-color:rgba(114, 191, 68, 0.9);
-            width: 150px;
-            height: 150px;
-            z-index: 1001;
-            color: white;
-            opacity: 0;
-        }
-
-        .ccwinnerbtnopen{
-            opacity: 1;
-        }
-
-        .ccwinnerbtninner{
-            margin-top: 30px;
-        }
-
-        .ccwinnerbtninner p {
-            width: 150px;
-        }
-
-        .ccopeninfo{
-            position: absolute;
-            border-top-right-radius: 50%;
-            border-top-left-radius: 50%;
-            border-bottom-left-radius: 50%;
-            bottom: 15px;
-            right: -150px;
-            background-color: rgba(114, 191, 68, 0.9);
-            width: 150px;
-            height: 150px;
-            z-index: 1001;
-            color: white;
-        }
-
-        .ccopeninfo p {
-            font-size: 18px;
-            width: 120px;
-            text-align: center;
-            margin-top: 20px;
-            margin: 40px auto;
-        }
-
-        .ccopeninfo small {
-            font-size: 75%;
-        }
-
-        .ccinfoopenshow{
-            right: 15px;
-        }
-
-        .paper {
-            width: 200px;
-            height: 100%;
-            z-index: 100;
-            position: absolute;
-        }
-
-        .cc-nosession-content {
-            position: absolute;
-            z-index: 1200;
-            width: 300px;
-            height: 100%;
-        }
-
-        .cc-nosession-content img {
-            margin-top: 15px;
-            margin-left: 35px;
-        }
-
-        .cc-nosession-content-caption{
-            width: 280px;
-            font-family: Georgia, Palatino, 'Palatino Linotype', serif;
-            text-align: center;
-            font-size: 16px;
-
-            padding: 0 15px 0 0;
-            margin-top: 25px;
-        }
-
-        .cc-nosession-content-caption span{
-            color: #006600;
-            margin: 0;
-            font-weight: bold;
-        }
-
-
-        .cc-voteregistered-content {
-            position: absolute;
-            z-index: 1200;
-            width: 300px;
-            height: 100%;
-        }
-
-        .cc-voteregistered-content img {
-            margin-top: 0;
-            margin-left: 35px;
-        }
-
-        .cc-voteregistered-content-caption{
-            width: 250px;
-            font-family: Georgia, Palatino, 'Palatino Linotype', serif;
-            text-align: center;
-            font-size: 16px;
-            padding: 0 15px 0 15px;
-            margin-top: 10px;
-        }
-
-        .cc-voteregistered-content-caption p{
-            color: #006600;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .ccindicator {
-            padding: 5px;
-            background-color: silver;
-            width: 100px;
-            position: absolute;
-            top: 130px;
-            height: 100px;
-            left: 595px;
-            transform: rotate(-5deg);
-            border: 6px solid #fff;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 50%;
-            background: #595959; /* Old browsers */
-            background: -moz-linear-gradient(top, #595959 0%, #000000 5%, #000000 5%, #474747 20%, #474747 20%, #666666 38%, #4c4c4c 47%, #2c2c2c 54%, #000000 64%, #111111 76%, #2b2b2b 83%, #1c1c1c 91%, #131313 100%);
-            background: -webkit-linear-gradient(top, #595959 0%,#000000 5%,#000000 5%,#474747 20%,#474747 20%,#666666 38%,#4c4c4c 47%,#2c2c2c 54%,#000000 64%,#111111 76%,#2b2b2b 83%,#1c1c1c 91%,#131313 100%);
-            background: linear-gradient(to bottom, #595959 0%,#000000 5%,#000000 5%,#474747 20%,#474747 20%,#666666 38%,#4c4c4c 47%,#2c2c2c 54%,#000000 64%,#111111 76%,#2b2b2b 75%,#1c1c1c 50%,#131313 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#595959', endColorstr='#131313',GradientType=0 );
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 );
-            -o-box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
-            -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
-            -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
-            -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
-            box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        .ccleft {
-            position: absolute;
-            top: 160px;
-            left: 510px;
-            color: yellow;
-            font-size: 12px;
-            text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
-            word-wrap: break-word;
-            width: 75px;
-            /* height: 60px; */
-            height: 60px;
-            margin-top: 15px;
-            text-align: right;
-            transform: rotate(-5deg);
-        }
-
-        .ccright {
-            position: absolute;
-            top: 140px;
-            left: 705px;
-            color: yellow;
-            font-size: 12px;
-            text-shadow: -1px -1px 0 #444, 1px -1px 0 #444, -1px 1px 0 #444, 1px 1px 0 #444;
-            word-wrap: break-word;
-            width: 75px;
-            height: 60px;
-            text-align: left;
-            transform: rotate(-5deg);
-            margin-top: 15px;
-        }
-
-        .cc-divider {
-            margin-top: 5px;
-            width: 2px;
-            height: 40px;
-            margin-left: 50%;
-            background-color: #ff9800;
-            transform-origin: bottom left;
-            transform: rotate(0deg);
-        }
-
-        .cc-divider-bottom {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: silver;
-            bottom: 31px;
-            left: 34px;
-        }
-
-        .cc-half-circle-inner {
-            position: absolute;
-            left: 9px;
-            top: 6px;
-            height: 40px;
-            width: 70px;
-            border-radius: 90px 90px 0 0;
-            border: dotted 3px #ff9800;
-            border-bottom-color: #333;
-            -moz-border-radius: 90px 90px 0 0;
-            -webkit-border-radius: 70px 70px 0 0;
-        }
-
-        .cc-pointer {
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 10px solid #f00;
-        }
-
-        .cc-meter-label{
-            position: absolute;
-            font-size: 7px;
-            color: #eeeeee;
-            bottom: 7px;
-            width: 20px;
-            text-align: center;
-            left: 35px;
-        }
-
-        .ccindicatorlight{
-            width: 10px;
-            height: 30px;
-            display: inline-table;
-            margin: 2px;
-            background-color: #999;
-            border: solid 1px white;
-            border-radius: 4px;
-            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-        }
-
-        #cc-leading-text {
-            color: white;
-            font-family: Georgia, Palatino, 'Palatino Linotype', serif;
-            font-style: italic;
-            font-size: 36px;
-            text-shadow: 1px 1px 2px black;
-            position: absolute;
-            top: 260px;
-            left: 455px;
-            transform: rotate(-5deg);
-        }
-
-        .ccred{
-            background-color: #F44336;
-        }
-
-        .ccgreen{
-            background-color: #4CAF50;
-        }
-
-        .ccdivider{
-            display: inline-table;
-            width: 1.5px;
-            height: 100%;
-            background-color: black;
-        }
-
-        @media (min-width: 901px) and (max-width: 1120px) {
-            .ccout #ccdiv{
-                transform: translate3d(0, -450px, 0);
-                -moz-transform: translate3d(0, -450px, 0);
-                -webkit-transform: translate3d(0, -450px, 0);
-                -ms-transform: translate3d(0, -450px, 0);
-                -o-transform: translate3d(0, -450px, 0);
-            }
-
-            .ccin #ccdiv, .ccCenterCracker #ccdiv{
-                transform: translate3d(-170px, -50px, 0);
-                -moz-transform: translate3d(-170px, -50px, 0);
-                -webkit-transform: translate3d(-170px, -50px, 0);
-                -ms-transform: translate3d(-170px, -50px, 0);
-                -o-transform: translate3d(-170px, -50px, 0);
-            }
-
-            .ccleftcrackerend {
-                transform: translate3d(-200px, 80px, 0);
-                -moz-transform: translate3d(-200px, 80px, 0);
-                -webkit-transform: translate3d(-200px, 80px, 0);
-                -ms-transform: translate3d(-200px, 80px, 0);
-                -o-transform: translate3d(-200px, 80px, 0);
-            }
-
-
-            .ccleftcrackeropen {
-                transform: translate3d(-225px, -50px, 0);
-                -moz-transform: translate3d(-225px, -50px, 0);
-                -webkit-transform: translate3d(-225px, -50px, 0);
-                -ms-transform: translate3d(-225px, -50px, 0);
-                -o-transform: translate3d(-225px, -50px, 0);
-            }
-
-            .ccrightcrackeropen {
-                transform: translate3d(300px, -40px, 0);
-                -moz-transform: translate3d(300px, -40px, 0);
-                -webkit-transform: translate3d(300px, -40px, 0);
-                -ms-transform: translate3d(300px, -40px, 0);
-                -o-transform: translate3d(300px, -40px, 0);
-            }
-
-            .ccrightcrackerend {
-                transform: translate3d(700px, 200px, 0);
-                -moz-transform: translate3d(700px, 200px, 0);
-                -webkit-transform: translate3d(700px, 200px, 0);
-                -ms-transform: translate3d(700px, 200px, 0);
-                -o-transform: translate3d(700px, 200px, 0);
-            }
-
-            #ccjokewrapper {
-                transform: translate3d(345px, 15px, 0);
-                -moz-transform: translate3d(345px, 15px, 0);
-                -webkit-transform: translate3d(345px, 15px, 0);
-                -ms-transform: translate3d(320px, -5px, 0);
-                -o-transform: translate3d(320px, -5px, 0);
-            }
-        }
-
-        @media (min-width: 680px) and (max-width: 900px) {
-
-            .ccleftcrackeropen {
-                transform: translate3d(-320px, -50px, 0);
-                -moz-transform: translate3d(-320px, -50px, 0);
-                -webkit-transform: translate3d(-320px, -50px, 0);
-                -ms-transform: translate3d(-320px, -50px, 0);
-                -o-transform: translate3d(-320px, -50px, 0);
-            }
-
-            .ccrightcrackeropen {
-                transform: translate3d(200px, -40px, 0);
-                -moz-transform: translate3d(200px, -40px, 0);
-                -webkit-transform: translate3d(200px, -40px, 0);
-                -ms-transform: translate3d(200px, -40px, 0);
-                -o-transform: translate3d(200px, -40px, 0);
-            }
-
-            .ccleftcrackerend {
-                transform: translate3d(-490px, 185px, 0);
-                -moz-transform: translate3d(-490px, 185px, 0);
-                -webkit-transform: translate3d(-490px, 185px, 0);
-                -ms-transform: translate3d(-490px, 185px, 0);
-                -o-transform: translate3d(-490px, 185px, 0);
-            }
-
-            .ccrightcrackerend{
-                transform: translate3d(400px, 200px, 0);
-                -moz-transform: translate3d(400px, 200px, 0);
-                -webkit-transform: translate3d(400px, 200px, 0);
-                -ms-transform: translate3d(400px, 200px, 0);
-                -o-transform: translate3d(400px, 200px, 0);
-            }
-
-
-            #ccjokewrapper {
-                height: 160px;
-                transform: translate3d(55px, 125px, 0);
-                -moz-transform: translate3d(55px, 125px, 0);
-                -webkit-transform: translate3d(55px, 125px, 0);
-                -ms-transform: translate3d(55px, 125px, 0);
-                -o-transform: translate3d(55px, 125px, 0);
-            }
-
-            .ccin #ccdiv {
-                transform: translate3d(-95px, 105px, 0);
-                -moz-transform: translate3d(-95px, 105px, 0);
-                -webkit-transform: translate3d(-95px, 105px, 0);
-                -ms-transform: translate3d(-95px, 105px, 0);
-                -o-transform: translate3d(-95px, 105px, 0);
-            }
-
-            .ccout #ccdiv {
-                transform: translate3d(-95px, 600px, 0);
-                -moz-transform: translate3d(-95px, 600px, 0);
-                -webkit-transform: translate3d(-95px, 600px, 0);
-                -ms-transform: translate3d(-95px, 600px, 0);
-                -o-transform: translate3d(-95px, 600px, 0);
-            }
-
-            .ccCenterCracker #ccdiv {
-                transform: translate3d(-95px, 15px, 0);
-                -moz-transform: translate3d(-95px, 15px, 0);
-                -webkit-transform: translate3d(-95px, 15px, 0);
-                -ms-transform: translate3d(-95px, 15px, 0);
-                -o-transform: translate3d(-95px, 15px, 0);
-            }
-
-            #ccimg {
-                width:900px;
-            }
-
-            .paper{
-                width: 992px;
-                height: auto;
-                transform: translate3d(0px, -285px, 0);
-                -moz-transform: translate3d(0px, -285px, 0);
-                -webkit-transform: translate3d(0px, -285px, 0);
-                -ms-transform: translate3d(0px, -285px, 0);
-                -o-transform: translate3d(0px, -285px, 0);
-            }
-
-            .paper img {
-                width: 100%;
-            }
-
-            .cc-voteregistered-content,
-            .cc-nosession-content {
-                width: 100%;
-                height: 150px;
-            }
-
-            .cc-voteregistered-content img,
-            .cc-nosession-content img {
-                margin-top: 0;
-                margin-right: 20px;
-                width: 160px;
-                float: right;
-            }
-
-            .cc-voteregistered-content-caption,
-            .cc-nosession-content-caption {
-                width: 50%;
-                font-size: 16px;
-                padding: 0 15px 0 10px;
-                margin-top: 10px;
-                float: left;
-            }
-
-        }
-
-        @media (min-width: 281px) and (max-width: 679px) {
-
-            .ccleftcrackeropen {
-                transform: translate3d(-350px, -50px, 0);
-                -moz-transform: translate3d(-350px, -50px, 0);
-                -webkit-transform: translate3d(-350px, -50px, 0);
-                -ms-transform: translate3d(-350px, -50px, 0);
-                -o-transform: translate3d(-350px, -50px, 0);
-            }
-
-            .ccrightcrackeropen {
-                transform: translate3d(170px, -40px, 0);
-                -moz-transform: translate3d(170px, -40px, 0);
-                -webkit-transform: translate3d(170px, -40px, 0);
-                -ms-transform: translate3d(170px, -40px, 0);
-                -o-transform: translate3d(170px, -40px, 0);
-            }
-
-            .ccleftcrackerend {
-                transform: translate3d(-470px, 175px, 0);
-                -moz-transform: translate3d(-470px, 175px, 0);
-                -webkit-transform: translate3d(-470px, 175px, 0);
-                -ms-transform: translate3d(-470px, 175px, 0);
-                -o-transform: translate3d(-470px, 175px, 0);
-            }
-
-            #ccjokewrapper {
-                height: 160px;
-                transform: translate3d(77px, 120px, 0);
-                -moz-transform: translate3d(77px, 120px, 0);
-                -webkit-transform: translate3d(77px, 120px, 0);
-                -ms-transform: translate3d(77px, 120px, 0);
-                -o-transform: translate3d(77px, 120px, 0);
-            }
-
-
-            .ccjokediv {
-                left: 75px;
-                top: 35px;
-                padding: 10px 10px;
-                width: 270px;
-                height: 75px;
-            }
-
-            .ccjokediv small {
-                margin-left: 20px;
-            }
-
-            .ccin #ccdiv {
-                transform: translate3d(-180px, 105px, 0);
-                -moz-transform: translate3d(-180px, 105px, 0);
-                -webkit-transform: translate3d(-180px, 105px, 0);
-                -ms-transform: translate3d(-180px, 105px, 0);
-                -o-transform: translate3d(-180px, 105px, 0);
-            }
-
-            .ccout #ccdiv {
-                transform: translate3d(-180px, 600px, 0);
-                -moz-transform: translate3d(-180px, 600px, 0);
-                -webkit-transform: translate3d(-180px, 600px, 0);
-                -ms-transform: translate3d(-180px, 600px, 0);
-                -o-transform: translate3d(-180px, 600px, 0);
-            }
-
-            .ccCenterCracker #ccdiv {
-                transform: translate3d(-180px, 15px, 0);
-                -moz-transform: translate3d(-180px, 15px, 0);
-                -webkit-transform: translate3d(-180px, 15px, 0);
-                -ms-transform: translate3d(-180px, 15px, 0);
-                -o-transform: translate3d(-180px, 15px, 0);
-            }
-
-            #ccimg {
-                width:850px;
-            }
-
-            .paper {
-                width: 679px;
-                height: auto;
-                transform: translate3d(0, -150px, 0);
-                -moz-transform: translate3d(0, -150px, 0);
-                -webkit-transform: translate3d(0, -150px, 0);
-                -ms-transform: translate3d(0, -150px, 0);
-                -o-transform: translate3d(0, -150px, 0);
-            }
-
-            .paper img {
-                width: 100%;
-            }
-
-            .cc-voteregistered-content,
-            .cc-nosession-content {
-                width: 100%;
-                height: 150px;
-            }
-
-            .cc-voteregistered-content img,
-            .cc-nosession-content img {
-                margin-top: 20px;
-                margin-right: 20px;
-                width: 90px;
-                float: right;
-            }
-
-            .cc-voteregistered-content-caption,
-            .cc-nosession-content-caption {
-                width: 50%;
-                font-size: 14px;
-                padding: 0 15px 0 10px;
-                margin-top: 10px;
-                float: left;
-            }
-
-            .cc-voteregistered-content-caption p,
-            .cc-nosession-content-caption p {
-                color: #006600;
-                font-weight: bold;
-                font-size: 16px;
-                margin-bottom: 2px;
-            }
-        }
-
-        @media (max-width: 280px) {
-            .cc-voteregistered-content-caption, .cc-nosession-content-caption {
-                width: 45%;
-                font-size: 12px;
-                padding: 0 5px 0 5px;
-            }
-
-            .cc-voteregistered-content img, .cc-nosession-content img {
-                margin-right: 5px;
-                width: 100px;
-            }
-
-            .ccCenterCracker #ccdiv {
-                transform: translate3d(-40px, 15px, 0);
-                -moz-transform: translate3d(-40px, 15px, 0);
-                -webkit-transform: translate3d(-40px, 15px, 0);
-                -ms-transform: translate3d(-40px, 15px, 0);
-                -o-transform: translate3d(-40px, 15px, 0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="client/css/cracker.css">
+    <!-- css3-mediaqueries.js for IE less than 9 -->
+    <!-- [if lt IE 9]>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
 </head>
 <body ng-controller="CrackerClientCtrl">
 
-    <!-- no session -->
-    <div id="ccnosessiondiv" ng-if="noSession">
-        <div class="paper">
-            <img class=" visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
-            <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
-        </div>
-        <div class="cc-nosession-content">
-            <img src="../img/xmascracker-logo-medium.png">
-            <div class="cc-nosession-content-caption">
-                Vote for the region you think deserves <span>$1 fares for Christmas</span>, and they might just get lucky.
-            </div>
-        </div>
+    <!-- overlay -->
+    <div id="cc-loading-overlay" class="cc-loading-overlay">
+        <script>
+            (function(){
+                setTimeout(function(){
+                    document.getElementById('cc-loading-overlay').style.display = 'none';
+                    document.getElementById('ccpromo').style.display = 'block';
+                    console.log('removing loading overlay');
+                },2000)
+            })();
+        </script>
     </div>
 
-    <!-- vote registered -->
-    <div id="ccvoteregistereddiv" ng-if="voteRegistered">
-        <div class="paper">
-            <img class="visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
-            <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
-        </div>
-        <div class="cc-voteregistered-content">
-            <div class="cc-voteregistered-content-caption">
-                <p>Thanks for voting!</p> Check back at {{session.endTime}} to see if your region has won <b>$1 flights for Christmas.</b>
+    <div id="ccpromo" style="display: none">
+        <!-- no session -->
+        <div id="ccnosessiondiv" ng-if="noSession" ng-cloak>
+            <div class="paper">
+                <img class="visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
+                <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
             </div>
-            <img src="../img/xmascracker-logo-medium.png">
-        </div>
-    </div>
-
-    <!-- Session Ended -->
-    <div id="ccinstructiondiv" ng-if="displayWinner">
-        <div class="paper">
-            <img class="visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
-            <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
-        </div>
-        <div class="cc-voteregistered-content">
-            <div class="cc-voteregistered-content-caption">
-                <p>Congratulations {{session.origin1.name}}!</p> See below for your <b>$1 flights for Christmas.</b>
-            </div>
-            <img src="../img/xmascracker-logo-medium.png">
-        </div>
-    </div>
-
-    <!-- live -->
-    <div id="ccmainwrapper" class="cctransfast">
-        <!-- cracker open -->
-        <div ng-if="sessionEnded">
-            <!-- confetti -->
-            <confetti play="displayCrackerEnd"></confetti>
-
-            <!-- joke -->
-            <div id="ccjokewrapper" class="cctransfast" ng-class="{ccjokestart : !displayJoke, ccjokeend : displayJoke}">
-                <div>
-                    <img src="../img/joke-wrapper-large.png">
+            <div class="cc-nosession-content">
+                <img src="../img/xmascracker-logo-medium.png">
+                <div class="cc-nosession-content-caption">
+                    Vote for the region you think deserves <span>{{defaultDealText}}</span>, and they might just get lucky.
                 </div>
-                <div class="ccjokediv">
-                    <div style="display: inline-flex; margin-left: -30px;font-weight: bold">
-                        <div>Q. </div><div style="word-wrap: break-word;max-width: 300px;">{{session.joke1}}</div>
+            </div>
+        </div>
+
+        <!-- vote registered -->
+        <div id="ccvoteregistereddiv" ng-if="voteRegistered" ng-cloak>
+            <div class="paper">
+                <img class="visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
+                <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
+            </div>
+            <div class="cc-voteregistered-content">
+                <div class="cc-voteregistered-content-caption">
+                    <p>Thanks for voting!</p> Check back at {{session.voteEndTime}} to see if your region has won <b>{{defaultDealText}}.</b>
+                </div>
+                <img src="../img/xmascracker-logo-medium.png">
+            </div>
+        </div>
+
+        <!-- Session Ended -->
+        <div id="ccinstructiondiv" ng-if="displayWinner" ng-cloak>
+            <div class="paper">
+                <img class="visible-sm visible-md visible-lg" src="../img/paper-tear_desktop.png">
+                <img class="visible-xs" src="../img/paper-tear_mobile@2x.png">
+            </div>
+            <div class="cc-voteregistered-content">
+                <div class="cc-voteregistered-content-caption">
+                    <p>Congratulations {{winningOrigin}}!</p> {{crackerOpenMessage}} <b>{{defaultDealText}}.</b>
+                </div>
+                <img src="../img/xmascracker-logo-medium.png">
+            </div>
+        </div>
+
+        <!-- live -->
+        <div id="ccmainwrapper" class="cctransfast">
+            <!-- cracker open -->
+            <div ng-if="sessionEnded" ng-cloak>
+                <!-- confetti -->
+                <confetti play="displayCrackerEnd"></confetti>
+
+                <!-- joke -->
+                <div id="ccjokewrapper" class="cctrans" ng-class="{ccjokestart : !displayJoke, ccjokeend : displayJoke}">
+                    <div>
+                        <img src="../img/joke-wrapper-large.png">
                     </div>
-                    <div style="display: inline-flex; font-size: 12px">
-                        <div style="font-weight: bold">a.  </div><div style="word-wrap: break-word;max-width: 300px;">{{session.joke2}}</div>
+                    <div class="ccjokediv">
+                        <div style="display: table;font-weight: bold;font-style: italic;height: 100%;position: relative;width: 100%;">
+                            <div style="display: table-cell;vertical-align: middle;text-align: center;">{{winningJoke}}</div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- cracker start -->
+                <div class="cctrans" id="ccdivend" ng-if="!displayBrokenCracker" ng-cloak>
+                    <div class="cccrackerinner">
+                        <img id="ccimg"  src="../img/start-frame_cracker-desktop@2x.png">
+                    </div>
+                </div>
+
+
+                <!-- cracker left piece -->
+                <div id="ccleftcrackeropen" class="cctransfast ccopen" ng-if="displayBrokenCracker" ng-class="{ccleftcrackeropen : !displayCrackerEnd ,ccleftcrackerend : displayCrackerEnd}" ng-cloak>
+                    <img src="../img/endframe-cracker-left-hand@2x.png">
+                </div>
+
+                <!-- cracker right piece -->
+                <div id="ccrightcrackeropen" class="cctransfast ccopen" ng-if="displayBrokenCracker" ng-class="{ccrightcrackeropen : !displayCrackerEnd ,ccrightcrackerend : displayCrackerEnd}" ng-cloak>
+                    <img src="../img/endframe-cracker-right-hand@2x.png">
+                </div>
+
+                <div id="ccopeninfo" class="ccopeninfo cctransfast visible-lg visible-md visible-sm" ng-class="{ccinfoopenshow : displayCrackerEnd}">
+                    <p>Check out Greenlight Deals below</p>
+                </div>
+
             </div>
 
             <!-- cracker start -->
-            <!--<div ng-if="sessionEnded" id="ccwrapper" class="ccout cctrans" ng-init="startTransitions()">-->
-                <!--<div class="cctrans" id="ccdiv">-->
-                    <!--<div class="cccrackerinner">-->
-                        <!--<img id="ccimg"  src="../img/start-frame_cracker-desktop@2x.png">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-
-            <!-- cracker left piece -->
-            <div id="ccleftcrackeropen" class="cctransfast ccopen" ng-class="{ccleftcrackeropen : !displayCrackerEnd ,ccleftcrackerend : displayCrackerEnd}">
-                <img src="../img/endframe-cracker-left-hand@2x.png">
-            </div>
-
-            <!-- cracker right piece -->
-            <div id="ccrightcrackeropen" class="cctransfast ccopen" ng-class="{ccrightcrackeropen : !displayCrackerEnd ,ccrightcrackerend : displayCrackerEnd}">
-                <img src="../img/endframe-cracker-right-hand@2x.png">
-            </div>
-
-            <div id="ccopeninfo" class="ccopeninfo cctransfast visible-lg visible-md visible-sm" ng-class="{ccinfoopenshow : displayCrackerEnd}">
-                <!--<p>Congratulations {{session.origin1.name}}! <br><small>Check deals below for your prize.</small></p>-->
-                <p>check details below for your prize</p>
-            </div>
-
-        </div>
-
-        <!-- cracker start -->
-        <div ng-if="!sessionEnded" id="ccwrapper" class="ccout cctrans" ng-init="startTransitions()">
-            <div class="cctrans" id="ccdiv">
-                <div class="cccrackerinner">
-                    <img id="ccimg"  src="../img/start-frame_cracker-desktop@2x.png">
-                    <!--&lt;!&ndash; level indicator &ndash;&gt;-->
-                    <div class="ccindicator" ng-if="!sessionEnded && !noSession">
-                        <div class="cc-meter-label">VOTE METER</div>
-                        <div class="cc-half-circle-inner"></div>
-                        <div id="cc-divider" class="cctrans cc-divider">
+            <div ng-if="!sessionEnded" id="ccwrapper" class="ccout cctrans" ng-init="startTransitions()" ng-cloak>
+                <div class="cctrans" id="ccdiv">
+                    <div class="cccrackerinner">
+                        <img id="ccimg"  src="../img/start-frame_cracker-desktop@2x.png">
+                        <!--level indicator-->
+                        <div class="ccindicator" ng-if="!sessionEnded && !noSession" ng-cloak>
+                            <div class="cc-meter-label">Who's Winning</div>
+                            <div class="cc-half-circle-inner"></div>
+                            <div id="cc-divider" class="cctrans cc-divider">
+                            </div>
+                            <div class="cc-divider-bottom"></div>
                         </div>
-                        <div class="cc-divider-bottom"></div>
-                    </div>
-
-                    <div class="ccleft">{{session.origin1.name}}</div>
-                    <div class="ccright">{{session.origin2.name}}</div>
-                </div>
-            </div>
-        </div>
-
-        <div id="ccoverlaywrapper" ng-if="!sessionEnded && !noSession && !voteRegistered">
-            <div id="ccleftoverlay" ng-mousedown="pullCracker('left')" ng-mouseup="resetCracker()" ng-mouseover="lefthovereffect = true" ng-mouseleave="lefthovereffect = false">
-                <div class="ccactionbtn cctrans ccout-left-btn" ng-class="{ccleftgrow:lefthovereffect}" id="ccleftbtn">
-                    <div>
-                        <div style="text-align: right;">
-                            <p class="ccvotetext">VOTE<br>FOR</p>
+                        <!--deal indicator-->
+                        <div class="ccindicator" ng-if="!sessionEnded && noSession" ng-cloak>
+                            <div class="cc-indicator-play-text">play for</div>
+                            <div class="cc-indicator-price-text">cheap</div>
+                            <div class="cc-indicator-fares-text">FARES</div>
                         </div>
-                        <p class="cciatatext">{{session.origin1.name}}</p>
+
+                        <div class="ccleft hidden-sm hidden-xs">{{session.origin1.name}}</div>
+                        <div class="ccright hidden-sm hidden-xs">{{session.origin2.name}}</div>
                     </div>
                 </div>
             </div>
 
-            <div id="ccrightoverlay" ng-mousedown="pullCracker('right')" ng-mouseup="resetCracker()" ng-mouseover="righthovereffect = true" ng-mouseleave="righthovereffect = false">
-                <div class="ccactionbtn cctrans ccout-right-btn" ng-class="{ccrightgrow:righthovereffect}" id="ccrightbtn">
-                    <div>
-                        <div style="text-align: right;">
-                            <p class="ccvotetext">VOTE<br>FOR</p>
+            <div id="ccoverlaywrapper" ng-if="!sessionEnded && !noSession && !voteRegistered" ng-cloak>
+                <div id="ccleftoverlay" ng-click="pullCracker('left')" ng-mousedown="pullCracker('left')" ng-mouseup="resetCracker()" ng-mouseover="lefthovereffect = true" ng-mouseleave="lefthovereffect = false">
+                    <div class="ccactionbtn cctrans ccout-left-btn" ng-class="{ccleftgrow:lefthovereffect}" id="ccleftbtn">
+                        <div style="display: table; width: 100%; height:100%;">
+                            <div style="display: table-cell;vertical-align: middle; text-align: center;">
+                                <div style="text-align: right;">
+                                    <p class="ccvotetext">VOTE<br>FOR</p>
+                                </div>
+                                <p class="cciatatext">{{session.origin1.name}}</p>
+                            </div>
                         </div>
-                        <p class="cciatatext">{{session.origin2.name}}</p>
                     </div>
                 </div>
-            </div>
 
+                <div id="ccrightoverlay" ng-mousedown="pullCracker('right')" ng-mouseup="resetCracker()" ng-mouseover="righthovereffect = true" ng-mouseleave="righthovereffect = false"
+                     ng-click="pullCracker('right')">
+                    <div class="ccactionbtn cctrans ccout-right-btn" ng-class="{ccrightgrow:righthovereffect}" id="ccrightbtn">
+                        <div style="display: table; width: 100%; height:100%;">
+                            <div style="display: table-cell;vertical-align: middle; text-align: center;">
+                                <div style="text-align: right;">
+                                    <p class="ccvotetext">VOTE<br>FOR</p>
+                                </div>
+                                <p class="cciatatext">{{session.origin2.name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+    <div class="cctnc">
+        <span>Terms & conditions apply</span>
+    </div>
 
-<script src="../vendor/angular-1.4.7/angular.min.js"></script>
-<script src="../vendor/angular-1.4.7/angular-resource.min.js"></script>
-<script src="../vendor/angular-1.4.7/angular-cookies.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="../vendor/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script src="../vendor/bootstrap-material-design-master/scripts/material.js"></script>
-<script src="../vendor/bootstrap-material-design-master/scripts/ripples.js"></script>
-<script>
-    $.material.init();
-</script>
-<script src="../vendor/Chart.js-master/Chart.min.js"></script>
-<script src="../vendor/angular-charts/angular-chart.min.js"></script>
-<script src="../app.js"></script>
-<script src="client/controllers/Cracker_Client.Ctrl.js"></script>
-<script src="client/directives/Confetti_Directive.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="dist/ChristmasCracker.min.js"></script>
+    <script>
+        $.material.init();
+    </script>
 </body>
 </html>

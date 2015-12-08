@@ -1,3 +1,16 @@
+/**
+ *
+ *
+**/
+
+// used to set dev ports or aws
+var dev_only = false;
+
+// connection ports and addresses
+var SERVER_PORT = dev_only ? 80 : process.env.PORT || 3000;
+var REDIS_HOST = dev_only ? 'localhost' : 'gas-cracker.isqbpv.ng.0001.apse2.cache.amazonaws.com';
+
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var http = require('http');
@@ -7,24 +20,26 @@ var app = express(); // the main app
 var path = require('path');
 var fs         = require("fs");
 
-var key_file   = "server/certs/server.key";
-var cert_file  = "server/certs/server.crt";
+if(dev_only){
+    var key_file   = "server/certs/server.key";
+    var cert_file  = "server/certs/server.crt";
 
-var config     = {
-    key: fs.readFileSync(key_file),
-    cert: fs.readFileSync(cert_file)
-};
+    var config     = {
+        key: fs.readFileSync(key_file),
+        cert: fs.readFileSync(cert_file)
+    };
 
 //CORS middleware
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    var allowCrossDomain = function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', 'https://localhost');
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    next();
-};
+        next();
+    };
 
-app.use(allowCrossDomain);
+    app.use(allowCrossDomain);
+}
 
 // body parser
 app.use(bodyParser.json()); // support json encoded bodies
@@ -32,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // redis interface
 var redis = require('redis');
-var client = redis.createClient(); //creates a new client
+var client = redis.createClient('6379',REDIS_HOST);//creates a new client
 
 // Redis Configuration
 client.on('connect', function() {
@@ -128,16 +143,29 @@ app.route('/api/:call')
                             var sess = JSON.parse( obj[i] );
                             var _startTime = new Date(sess.startTime);
                             var _endTime = new Date(sess.endTime);
+                            var _voteEndTime = new Date(sess.voteEndTime);
+                            var _dealStartTime = new Date(sess.dealStartTime);
                             var _serverTime = new Date();
-                            // used when deal time elapses
-                            var offsetHours = 1;
-                            var dealOffSetTime = _serverTime.setHours(_serverTime.getHours()+offsetHours);
-
-                            if(_startTime < _serverTime && _endTime > dealOffSetTime){
+                            console.log('startTime time is '+_startTime.toDateString());
+                            console.log('endTime time is '+_endTime.toDateString());
+                            console.log('server time is '+_serverTime.toDateString());
+                            if(_startTime < _serverTime && _endTime > _serverTime){
                                 // set deal status
                                 sess.live = _endTime > _serverTime;
+                                sess.status = 'VOTING';
+                                // check vote end
+                                if(_voteEndTime < _serverTime){
+                                    sess.status = 'VOTING_END';
+                                }
+                                // check deal start
+                                if(_dealStartTime < _serverTime){
+                                    sess.status = 'DEAL_START';
+                                }
+                                console.log('server time is '+_serverTime.toDateString());
                                 result = sess;
                                 break;
+                            }else{
+                                console.log('no current session');
                             }
                         }
                     }
@@ -161,6 +189,46 @@ app.route('/api/:call')
                         res.send( replies );
                     });
                 break;
+            case 'getGraphData':
+                client.smembers("type:session", function (err, result) {
+                    if(result && result.length > 0){
+                        graphdata = [];
+                        tempdata = [];
+                        var multi = client.multi();
+                        // parse data
+                        for(var i = 0; i < result.length; i++){
+                            var sess = JSON.parse( result[i] );
+                            // get origin1 votes
+                            multi.get("type:votes:"+sess.id+':origin1');
+                            multi.get("type:votes:"+sess.id+':origin2');
+                        }
+                        multi.exec(function(err,replies){
+                            if(err){
+                                console.log("err="+err);
+                            }
+                            var returningArray = [];
+                            var incr = 0;
+
+                            for(var n=0; n < result.length; n++){
+                                var resObj = JSON.parse(result[n]);
+                                resObj.origin1VoteCount = replies[incr];
+                                incr++;
+                                resObj.origin2VoteCount = replies[incr];
+                                incr++;
+                                returningArray.push(resObj);
+                            }
+                            setTimeout(function(){
+                                res.send(returningArray);
+                            },0);
+                        });
+                    }
+                });
+                break;
+            case 'getServerTime':
+                var serverDate = new Date().toDateString();
+                var serverTime = new Date().toTimeString();
+                res.send(serverDate + ' - ' + serverTime);
+                break;
             default :
                 res.end();
                 break;
@@ -173,7 +241,7 @@ app.route('/api/:call')
                 console.log('sessionid is '+req.body.id);
                 // session data
                 var session_obj = {
-                    "id" : req.body.id,
+                    "id" : Math.floor(Math.random()*90000) + 10000,
                     "destination" : req.body.destination,
                     "origin1" : req.body.origin1,
                     "origin2" : req.body.origin2,
@@ -181,11 +249,14 @@ app.route('/api/:call')
                     "joke2" : req.body.joke2,
                     "startTime" : req.body.startTime,
                     "endTime" : req.body.endTime,
+                    "dealStartTime" : req.body.dealStartTime,
+                    "voteEndTime" : req.body.voteEndTime,
                     "startMessage" : req.body.startMessage,
                     "nextVotingMessage" : req.body.nextVotingMessage,
                     "origin1votes" : req.body.origin1votes,
                     "origin2votes" : req.body.origin2votes
                 };
+                console.log(session_obj.id);
                 var session_arr = [
                     "type:session",JSON.stringify(session_obj)
                 ];
@@ -200,7 +271,7 @@ app.route('/api/:call')
                 });
 
                 // vote store ORIGIN1
-                var origin1Key = "type:votes:"+req.body.id+':origin1';
+                var origin1Key = "type:votes:"+session_obj.id+':origin1';
                 console.log(origin1Key);
                 client.set(origin1Key,0, function (err, res) {
                     if(err){
@@ -212,7 +283,7 @@ app.route('/api/:call')
                 });
 
                 // vote store ORIGIN2
-                var origin2Key = "type:votes:"+req.body.id+':origin2';
+                var origin2Key = "type:votes:"+session_obj.id+':origin2';
                 client.set(origin2Key,0, function (err, res) {
                     if(err){
                         console.log(err);
@@ -221,7 +292,7 @@ app.route('/api/:call')
                         console.log(origin2Key + ' ' + res);
                     }
                 });
-
+                res.send(200);
                 res.end();
                 break;
             case 'addVote':
@@ -239,35 +310,43 @@ app.route('/api/:call')
                 });
                 break;
             case 'removeSession':
-                var session = {
-                    "id" : req.body.id,
-                    "destination" : req.body.destination,
-                    "origin1" : req.body.origin1,
-                    "origin2" : req.body.origin2,
-                    "joke1" : req.body.joke1,
-                    "joke2" : req.body.joke2,
-                    "startTime" : req.body.startTime,
-                    "endTime" : req.body.endTime,
-                    "startMessage" : req.body.startMessage,
-                    "nextVotingMessage" : req.body.nextVotingMessage,
-                    "origin1votes" : req.body.origin1votes,
-                    "origin2votes" : req.body.origin2votes
-                };
-                console.log('removeSession called: '+JSON.stringify(session));
-                var arr = [
-                    "type:session",JSON.stringify(session)
-                ];
-                var responseCode = 200;
-                client.srem(arr, function (err, res) {
-                    if(err){
-                        console.log(err);
-                        responseCode = 503;
-                    }
-                    if(res){
-                        console.log('removed: '+res);
+                var session = {};
+
+                client.smembers("type:session", function (err, result) {
+                    if (result && result.length > 0) {
+                        for(var i=0; i < result.length; i++ ){
+                            var obj = JSON.parse(result[i]);
+                            console.log('----------------------------');
+                            console.log(obj.id);
+                            console.log(req.body.id);
+                            console.log('----------------------------');
+                            if(obj.id == req.body.id){
+                                console.log('got match');
+                                session = result[i];
+                                break;
+                            }
+                        }
+
+                        console.log('removeSession called: '+session);
+                        var arr = [
+                            "type:session",session
+                        ];
+                        var responseCode = 200;
+                        client.srem(arr, function (err, res) {
+                            if(err){
+                                console.log(err);
+                                responseCode = 503;
+                            }
+                            if(res){
+                                console.log('removed: '+res);
+                            }
+                        });
+                        console.log('end of removeSession method');
+                        res.sendStatus(responseCode);
                     }
                 });
-                res.sendStatus(responseCode);
+
+
                 break;
             default :
                 res.end();
@@ -287,6 +366,10 @@ app.route('/*')
     });
 
 // Bind to port
-//app.listen(80);
-http.createServer(app).listen(80);
-https.createServer(config,app).listen(443);
+http.createServer(app).listen(SERVER_PORT);
+
+if(dev_only){
+
+    https.createServer(config,app).listen(443);
+}
+

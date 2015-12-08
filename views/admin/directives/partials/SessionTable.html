@@ -1,27 +1,55 @@
+<style>
+    .alertModal {
+        top: 35%;
+        display: block;
+    }
+    .ended {
+        color: #ccc !important;
+        background-color: #f9f9f9 !important;
+    }
+    .live {
+        color: #62cc49 !important;
+    }
+</style>
 <div class="table-responsive">
     <h4>Session List:</h4>
     <table class="table table-striped table-hover">
         <thead>
         <tr>
             <th>Destination</th>
-            <th>Origin 1</th>
+            <th>Org1</th>
             <th>Votes</th>
-            <th>Origin 2</th>
+            <th>Org2</th>
             <th>Votes</th>
             <th>Time</th>
             <th>  </th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="session in sessions" ng-click="setSession(session)">
+        <tr ng-repeat="session in sessions | orderBy:orderByDate:true" ng-click="setSession(session)" ng-class="{ended : session.sessionended}">
             <td>{{session.destination.name}}</td>
             <td>{{session.origin1.code}}</td>
-            <td>{{session.origin1votes}}</td>
+            <td>{{session.origin1VoteCount}}</td>
             <td>{{session.origin2.code}}</td>
-            <td>{{session.origin1votes}}</td>
+            <td>{{session.origin2VoteCount}}</td>
             <td>{{session.startTime}} - {{session.endTime}}</td>
             <td ng-click="removeSessionFromTable(session.redisIndex)"><i class="mdi-navigation-close"></i></td>
         </tr>
         </tbody>
     </table>
+</div>
+
+<!-- modal for toast messages -->
+<div class="modal" ng-class="{alertModal : modalSessionId !== null}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Are you sure you want to delete this session?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modalSessionId" ng-click="modalSessionId = null">No</button>
+                <button type="button" class="btn btn-primary" ng-click="removeSessionConfirmed(modalSessionId)">Yes</button>
+            </div>
+        </div>
+    </div>
 </div>
