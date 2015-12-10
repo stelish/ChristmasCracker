@@ -14,7 +14,7 @@ body {
     background-size: cover;
 }
 
-.cctnc {
+.cctnc a {
     position: absolute;
     bottom: 5px;
     right: 5px;
@@ -671,12 +671,13 @@ body {
 
 .cc-meter-label{
     position: absolute;
-    font-size: 7px;
-    color: #eeeeee;
-    bottom: 7px;
-    width: 25px;
+    font-size: 9px;
+    color: #fff;
+    bottom: 10px;
+    width: 35px;
     text-align: center;
-    left: 32px;
+    left: 28px;
+    line-height: 1.1;
 }
 
 .ccindicatorlight{
@@ -799,8 +800,10 @@ body {
     }
 
     .cc-meter-label {
-        bottom: 4px;
-        left: 29px;
+        font-size: 8px;
+        bottom: 7px;
+        width: 30px;
+        left: 25px;
     }
 
     .cc-half-circle-inner {
@@ -961,8 +964,10 @@ body {
     }
 
     .cc-meter-label {
-        bottom: 3px;
-        left: 27px;
+        font-size: 8px;
+        bottom: 7px;
+        width: 30px;
+        left: 25px;
     }
 
     .cc-half-circle-inner {
@@ -977,7 +982,7 @@ body {
     }
 
     .cciatatext {
-        font-size: 18px;
+        font-size: 15px;
     }
 
     #ccleftbtn .ccvotetext, #ccrightbtn .ccvotetext {
@@ -1320,6 +1325,7 @@ body {
     }
 
     .cc-meter-label {
+        font-size:7px;
         bottom: 3px;
         left: 29px;
     }

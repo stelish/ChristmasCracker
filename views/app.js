@@ -4,7 +4,7 @@
 var app = angular.module('app',['chart.js','ngCookies']);
 
 var dev_only = false;
-var serverUrl = dev_only ? 'https://localhost' : 'https://promo.grabaseat.co.nz';
+var serverUrl = dev_only ? 'https://loalhost' : 'https://promo.grabaseat.co.nz';
 
 Chart.defaults.global.colours = [
     '#00B8D4', // blue

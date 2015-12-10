@@ -25,6 +25,8 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
     $scope.winningJoke = "";
 
     $scope.session = null;
+    var randomnVotingDialPlayed = false;
+    $scope.sessionGetterInterval = null;
 
     $scope.setSessionStates = function(){
         if($scope.session){
@@ -36,10 +38,24 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
                 $scope.setMessageText($scope.session.status);
             }else{
                 $scope.sessionEnded = false;
+                $scope.noSession = false;
+                $scope.voteRegistered = false;
+                $scope.forceApply();
             }
         } else {
-            $scope.noSession = true;
+            $scope.setNoSessionState();
         }
+    };
+
+    $scope.setNoSessionState = function(){
+        $scope.noSession = true;
+        $scope.sessionEnded = false;
+        $scope.voteRegistered = false;
+        $scope.displayWinner = false;
+        $scope.displayBrokenCracker = false;
+        $scope.displayCrackerEnd = false;
+        $scope.displayJoke = false;
+        $scope.forceApply();
     };
 
     $scope.setMessageText = function(status){
@@ -71,14 +87,14 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         },500);
     };
 
-    var randomnVotingDialPlayed = false;
-
     $scope.setSessionGetters = function(){
-        setTimeout(function(){
-            $scope.getSession();
-            // get votes
-            $scope.getVotes();
-        },30000);
+        if(!$scope.sessionGetterInterval){
+            $scope.sessionGetterInterval = setInterval(function(){
+                $scope.getSession();
+                // get votes
+                $scope.getVotes();
+            },3e4);
+        }
     };
 
     $scope.init = function(){
@@ -86,8 +102,6 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         $scope.setSessionStates();
         // get votes
         $scope.getVotes();
-        //
-        $scope.setSessionGetters();
         // set cracker open if session has ended
         if($scope.sessionEnded){
             if(!$scope.displayCrackerEnd){$scope.startTuggingEffect();}
@@ -97,6 +111,8 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
             var cookie = $scope.session ? $cookieStore.get('cc'+$scope.session.id) : null;
             if(cookie){
                 $scope.voteRegistered = true;
+            }else{
+                $scope.startTransitions();
             }
             // start dial animation
             if(!randomnVotingDialPlayed){
@@ -134,12 +150,14 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
     };
 
     $scope.getVotes = function(){
-      $http.get($scope.serverUrl+'/api/getVotesForSession?id='+$scope.session.id).then(function(res){
-            // assume for in array is origin1
-          if(res.data){
-              $scope.calculateVotes(res.data[0],res.data[1]);
-          }
-      });
+        if($scope.session && $scope.session.id){
+            $http.get($scope.serverUrl+'/api/getVotesForSession?id='+$scope.session.id).then(function(res){
+                // assume for in array is origin1
+                if(res.data){
+                    $scope.calculateVotes(res.data[0],res.data[1]);
+                }
+            });
+        }
     };
 
     $scope.setDial = function(num){
@@ -217,7 +235,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         document.getElementById('ccmainwrapper').style.marginLeft = distance;
 
         // add vote
-        $scope.addVote(direction === 'left' ? 'origin1' : 'origin2');
+        //$scope.addVote(direction === 'left' ? 'origin1' : 'origin2');
         if(document.body.offsetWidth < 900){
             setTimeout($scope.resetCracker,1200);
         }
@@ -242,14 +260,14 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
             if(document.getElementById('ccwrapper')){
                 document.getElementById('ccwrapper').className = _classNames;
             }
-        },2000);
+        },2e3);
 
         setTimeout(function(){
             if(document.getElementById('ccleftbtn')){
                 document.getElementById('ccleftbtn').className = 'ccactionbtn cctrans ccin-left-btn';
                 document.getElementById('ccrightbtn').className = 'ccactionbtn cctrans ccin-right-btn';
             }
-        },3000);
+        },3e3);
     };
 
     $scope.parseSession = function(sessObj){
@@ -258,13 +276,13 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         sessObj.origin2 = JSON.parse(sessObj.origin2);
         // parse vote end time
         var voteEndDate = new Date(sessObj.voteEndTime);
-        var vtime = voteEndDate.getHours().toString() + ':' + voteEndDate.getMinutes().toString();
-        var vdate = '('+voteEndDate.getDate().toString() + '/' + voteEndDate.getMonth().toString() + '/' + voteEndDate.getYear().toString()+')';
+        var vtime = voteEndDate.getHours().toString() + ':' + (voteEndDate.getMinutes().toString() == '0' ? voteEndDate.getMinutes().toString() + '0' : voteEndDate.getMinutes().toString());
+        var vdate = '('+voteEndDate.getDate().toString() + '/' + voteEndDate.getMonth().toString() + '/' + voteEndDate.getFullYear().toString()+')';
         sessObj.voteEndTime = vtime + ' today ' + vdate;
         // parse deal start time
         var dealStartTime = new Date(sessObj.dealStartTime);
-        var dtime = dealStartTime.getHours().toString() + ':' + dealStartTime.getMinutes().toString();
-        var ddate = '('+dealStartTime.getDate().toString() + '/' + dealStartTime.getMonth().toString() + '/' + dealStartTime.getYear().toString()+')';
+        var dtime = dealStartTime.getHours().toString() + ':' + (dealStartTime.getMinutes().toString() == '0' ? dealStartTime.getMinutes().toString() + '0' : dealStartTime.getMinutes().toString());
+        var ddate = '('+dealStartTime.getDate().toString() + '/' + dealStartTime.getMonth().toString() + '/' + dealStartTime.getFullYear().toString()+')';
         sessObj.dealStartTime = dtime + ' today ' + ddate;
 
         return sessObj;
@@ -276,6 +294,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
                 $scope.session = $scope.parseSession(res.data);
                 $scope.init();
             }else{
+                $scope.session = null;
                 $scope.setSessionStates();
             }
         });

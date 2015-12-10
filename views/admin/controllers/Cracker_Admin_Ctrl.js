@@ -122,6 +122,16 @@ app.controller('CrackerAdminCtrl',['$scope','$http','$filter',function($scope,$h
     $scope.loginUsernameSuccess = false;
     $scope.loginPasswordSuccess = false;
 
+    $scope.pieColours = [
+        '#00B0FF', // blue
+        '#FF6D00', // light grey
+        '#F7464A', // red
+        '#388E3C', // green
+        '#FF6D00', // yellow
+        '#949FB1', // grey
+        '#4D5360'  // dark grey
+    ];
+
     $scope.getTotalVotes = function(){
         var total = 0;
         for(var i=0; i < $scope.sessions.length; i++){

@@ -4,7 +4,7 @@
 **/
 
 // used to set dev ports or aws
-var dev_only = false;
+var dev_only = true;
 
 // connection ports and addresses
 var SERVER_PORT = dev_only ? 80 : process.env.PORT || 3000;
