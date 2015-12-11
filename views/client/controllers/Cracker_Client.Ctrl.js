@@ -5,7 +5,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
     // used to set dev ports or aws
     $scope.serverUrl = 'https://promo.grabaseat.co.nz';
-    //$scope.serverUrl = 'https://localhost';
+   // $scope.serverUrl = 'https://isis-ws-103.isis.airnz.co.nz';
 
     $scope.righthovereffect = false;
     $scope.lefthovereffect = false;
@@ -13,6 +13,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
     $scope.sessionEnded = false;
     $scope.noSession = false;
     $scope.voteRegistered = false;
+    $scope.voted = false;
     $scope.displayWinner = false;
     $scope.displayBrokenCracker = false;
     $scope.displayCrackerEnd = false;
@@ -235,7 +236,10 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         document.getElementById('ccmainwrapper').style.marginLeft = distance;
 
         // add vote
-        //$scope.addVote(direction === 'left' ? 'origin1' : 'origin2');
+        if(!$scope.voted){
+            $scope.addVote(direction === 'left' ? 'origin1' : 'origin2');
+            $scope.voted = true;
+        }
         if(document.body.offsetWidth < 900){
             setTimeout($scope.resetCracker,1200);
         }
@@ -277,12 +281,12 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         // parse vote end time
         var voteEndDate = new Date(sessObj.voteEndTime);
         var vtime = voteEndDate.getHours().toString() + ':' + (voteEndDate.getMinutes().toString() == '0' ? voteEndDate.getMinutes().toString() + '0' : voteEndDate.getMinutes().toString());
-        var vdate = '('+voteEndDate.getDate().toString() + '/' + voteEndDate.getMonth().toString() + '/' + voteEndDate.getFullYear().toString()+')';
+        var vdate = '('+voteEndDate.getDate().toString() + '/' + (voteEndDate.getMonth() + 1 ).toString() + '/' + voteEndDate.getFullYear().toString()+')';
         sessObj.voteEndTime = vtime + ' today ' + vdate;
         // parse deal start time
         var dealStartTime = new Date(sessObj.dealStartTime);
         var dtime = dealStartTime.getHours().toString() + ':' + (dealStartTime.getMinutes().toString() == '0' ? dealStartTime.getMinutes().toString() + '0' : dealStartTime.getMinutes().toString());
-        var ddate = '('+dealStartTime.getDate().toString() + '/' + dealStartTime.getMonth().toString() + '/' + dealStartTime.getFullYear().toString()+')';
+        var ddate = '('+dealStartTime.getDate().toString() + '/' + (voteEndDate.getMonth() + 1 ).toString() + '/' + dealStartTime.getFullYear().toString()+')';
         sessObj.dealStartTime = dtime + ' today ' + ddate;
 
         return sessObj;
@@ -330,7 +334,6 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function(res) {
             $scope.handleVoteResult();
-            return res.data;
         });
 
     };

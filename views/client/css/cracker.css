@@ -973,7 +973,7 @@ body {
     .cc-half-circle-inner {
         left: 4px;
         top: 3px;
-        height: 35px;
+        /*height: 35px;*/
     }
 
     .cc-divider-bottom {
@@ -1148,12 +1148,25 @@ body {
     .cc-nosession-content img, .cc-voteregistered-content img {
         margin-left: 0;
     }
+
+    .ccleft {
+        top: 125px;
+        left: 340px;
+        font-size: 10px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .ccright{
+        top: 112px;
+        left: 485px;
+        font-size: 10px;
+        width: 55px;
+        height: 40px;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 600px) {
-    #ccoverlaywrapper {
-        width: 308px;
-    }
     .cc-voteregistered-content,
     .cc-nosession-content {
         width: 100%;
@@ -1178,33 +1191,49 @@ body {
     }
 
     .ccin #ccdiv, .ccin #ccdivend {
-        transform: translate3d(-120px, 75px, 0);
-        -moz-transform: translate3d(-120px, 75px, 0);
-        -webkit-transform: translate3d(-120px, 75px, 0);
-        -ms-transform: translate3d(-120px, 75px, 0);
-        -o-transform: translate3d(-120px, 75px, 0);
+        transform: translate3d(-170px, 75px, 0);
+        -moz-transform: translate3d(-170px, 75px, 0);
+        -webkit-transform: translate3d(-170px, 75px, 0);
+        -ms-transform: translate3d(-170px, 75px, 0);
+        -o-transform: translate3d(-170px, 75px, 0);
     }
 
     .ccout #ccdiv, .ccout #ccdivend {
-        transform: translate3d(-120px, 600px, 0);
-        -moz-transform: translate3d(-120px, 600px, 0);
-        -webkit-transform: translate3d(-120px, 600px, 0);
-        -ms-transform: translate3d(-120px, 600px, 0);
-        -o-transform: translate3d(-120px, 600px, 0);
+        transform: translate3d(-170px, 600px, 0);
+        -moz-transform: translate3d(-170px, 600px, 0);
+        -webkit-transform: translate3d(-170px, 600px, 0);
+        -ms-transform: translate3d(-170px, 600px, 0);
+        -o-transform: translate3d(-170px, 600px, 0);
     }
 
     .ccCenterCracker #ccdiv, .ccCenterCracker #ccdivend {
-        transform: translate3d(-120px, 15px, 0);
-        -moz-transform: translate3d(-120px, 15px, 0);
-        -webkit-transform: translate3d(-120px, 15px, 0);
-        -ms-transform: translate3d(-120px, 15px, 0);
-        -o-transform: translate3d(-120px, 15px, 0);
+        transform: translate3d(-170px, 15px, 0);
+        -moz-transform: translate3d(-170px, 15px, 0);
+        -webkit-transform: translate3d(-170px, 15px, 0);
+        -ms-transform: translate3d(-170px, 15px, 0);
+        -o-transform: translate3d(-170px, 15px, 0);
+    }
+
+    .ccleft {
+        top: 125px;
+        left: 340px;
+        font-size: 10px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .ccright{
+        top: 112px;
+        left: 485px;
+        font-size: 10px;
+        width: 55px;
+        height: 40px;
     }
 }
 
 @media (max-width: 280px) {
     #ccoverlaywrapper {
-        width: 308px;
+        width: 255px;
     }
 
     #ccimg {
@@ -1326,14 +1355,14 @@ body {
 
     .cc-meter-label {
         font-size:7px;
-        bottom: 3px;
-        left: 29px;
+        bottom: 8px;
+        left: 23px;
     }
 
     .cc-half-circle-inner {
         left: 4px;
         top: 3px;
-        height: 35px;
+        /*height: 35px;*/
     }
 
     .cc-divider-bottom {
@@ -1375,5 +1404,21 @@ body {
         -webkit-transform: translate3d(-290px, 15px, 0);
         -ms-transform: translate3d(-290px, 15px, 0);
         -o-transform: translate3d(-290px, 15px, 0);
+    }
+
+    .ccleft {
+        top: 125px;
+        left: 323px;
+        font-size: 9px;
+        width: 55px;
+        height: 30px;
+    }
+
+    .ccright{
+        top: 112px;
+        left: 455px;
+        font-size: 9px;
+        width: 55px;
+        height: 25px;
     }
 }
