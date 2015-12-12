@@ -3,8 +3,8 @@
  */
 var app = angular.module('app',['chart.js','ngCookies']);
 
-var dev_only = false;
-var serverUrl = dev_only ? 'https://isis-ws-103.isis.airnz.co.nz' : 'https://promo.grabaseat.co.nz';
+var dev_only = true;
+var serverUrl = dev_only ? 'https://localhost' : 'https://promo.grabaseat.co.nz';
 
 Chart.defaults.global.colours = [
     '#00B8D4', // blue

@@ -4,8 +4,8 @@
 app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($scope,$http,$cookieStore){
 
     // used to set dev ports or aws
-    $scope.serverUrl = 'https://promo.grabaseat.co.nz';
-   // $scope.serverUrl = 'https://isis-ws-103.isis.airnz.co.nz';
+    //$scope.serverUrl = 'https://promo.grabaseat.co.nz';
+     $scope.serverUrl = 'https://192.168.1.2';
 
     $scope.righthovereffect = false;
     $scope.lefthovereffect = false;
@@ -200,11 +200,21 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
         $scope.displayBrokenCracker = true;
         $scope.forceApply();
         setTimeout(function(){
+            var isIE9OrBelow =  /MSIE\s/.test(navigator.userAgent) && parseFloat(navigator.appVersion.split("MSIE")[1]) < 10;
+            if(isIE9OrBelow){
+                document.getElementById('ccleftcrackeropen').className += ' ccIE9LeftCracker';
+                document.getElementById('ccrightcrackeropen').className += ' ccIE9RightCracker';
+                document.getElementById('ccjokewrapper').className += ' ccIE9JokeWrapper';
+            }
             $scope.displayCrackerEnd = true;
             $scope.showJoke();
             $scope.forceApply();
 
         },200);
+    };
+
+    $scope.handleIE9Transform = function(){
+
     };
 
     $scope.startTuggingEffect = function(){
@@ -254,16 +264,21 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
     $scope.startTransitions = function(){
 
+
         setTimeout(function(){
+
             var _classNames = 'cctrans ccin';
+
             if(!$scope.voteRegistered && !$scope.noSession){
                 _classNames = 'cctrans ccCenterCracker';
             }else if($scope.noSession){
                 _classNames = 'cctrans ccin';
             }
+
             if(document.getElementById('ccwrapper')){
                 document.getElementById('ccwrapper').className = _classNames;
             }
+
         },2e3);
 
         setTimeout(function(){

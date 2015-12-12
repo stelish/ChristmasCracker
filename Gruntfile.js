@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                     'views/vendor/bootstrap-material-design-master/scripts/ripples.js',
                     'views/vendor/Chart.js-master/Chart.js',
                     'views/vendor/angular-charts/angular-chart.js',
-                    'views/vendor/fastclick-master/lib/fastclick.js',
+                    //'views/vendor/fastclick-master/lib/fastclick.js',
                     'views/app.js',
                     'views/client/*.js',
                     'views/client/**/*.js'

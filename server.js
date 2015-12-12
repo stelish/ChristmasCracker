@@ -8,7 +8,7 @@ var dev_only = true;
 
 // connection ports and addresses
 var SERVER_PORT = dev_only ? 80 : process.env.PORT || 3000;
-var REDIS_HOST = dev_only ? 'localhost' : 'gas-cracker.isqbpv.ng.0001.apse2.cache.amazonaws.com';
+var REDIS_HOST = dev_only ? '192.168.1.2' : 'gas-cracker.isqbpv.ng.0001.apse2.cache.amazonaws.com';
 
 
 var express = require('express');
@@ -31,7 +31,7 @@ if(dev_only){
 
 //CORS middleware
     var allowCrossDomain = function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', 'https://localhost');
+        res.header('Access-Control-Allow-Origin', 'https://192.168.1.2');
         res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
         res.header('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -76,6 +76,18 @@ app.route('/admin')
         console.log(app.path());
         res.type('.html');
         res.sendFile(path.join(__dirname + '/views/admin/ChristmasCrackerAdmin.html'));
+    });
+
+/**
+ * Get's Main Admin Dashboard Page
+ * Used to enable short request to /admin
+ */
+app.route('/test')
+    .get(function(req, res) {
+        console.log('Accessing the test section ...');
+        console.log(app.path());
+        res.type('.html');
+        res.sendFile(path.join(__dirname + '/views/client/TestPage.html'));
     });
 /**
  * Serves API
