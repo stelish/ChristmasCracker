@@ -19,6 +19,8 @@ Chart.defaults.global.colours = [
 // initialiser for FastClick which removes the 300ms delay from mobile browsers on click events
 if(window.addEventListener){
     window.addEventListener('load', function () {
-        FastClick.attach(document.body);
+        if(typeof FastClick !== 'undefined'){
+            FastClick.attach(document.body);
+        }
     }, false);
 }

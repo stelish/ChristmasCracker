@@ -5,7 +5,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
     // used to set dev ports or aws
     //$scope.serverUrl = 'https://promo.grabaseat.co.nz';
-     $scope.serverUrl = 'https://192.168.1.2';
+    $scope.serverUrl = 'https://localhost';
 
     $scope.righthovereffect = false;
     $scope.lefthovereffect = false;
@@ -90,7 +90,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
     $scope.setSessionGetters = function(){
         if(!$scope.sessionGetterInterval){
-            $scope.sessionGetterInterval = setInterval(function(){
+            $scope.sessionGetterInterval = window.setInterval(function(){
                 $scope.getSession();
                 // get votes
                 $scope.getVotes();
@@ -152,7 +152,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
     $scope.getVotes = function(){
         if($scope.session && $scope.session.id){
-            $http.get($scope.serverUrl+'/api/getVotesForSession?id='+$scope.session.id).then(function(res){
+            $http.get($scope.serverUrl+'/api/getVotesForSession?id='+$scope.session.id+'&time='+new Date().getTime().toString()).then(function(res){
                 // assume for in array is origin1
                 if(res.data){
                     $scope.calculateVotes(res.data[0],res.data[1]);
@@ -178,7 +178,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
 
             $scope.setDial(num);
         }
-        var interval = setInterval(function(){
+        var interval = window.setInterval(function(){
             if(int < length){
                 randomnlyMoveDial();
                 int++;
@@ -226,7 +226,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
             document.getElementById('ccmainwrapper').style.marginLeft = goLeft ? '25px' : '-25px';
         }
 
-        var interval = setInterval(function(){
+        var interval = window.setInterval(function(){
             if(length > int){
                 moveCracker();
                 goLeft = !goLeft;
@@ -263,7 +263,6 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
     };
 
     $scope.startTransitions = function(){
-
 
         setTimeout(function(){
 
@@ -308,7 +307,7 @@ app.controller('CrackerClientCtrl',['$scope','$http','$cookieStore',function($sc
     };
 
     $scope.getSession = function(){
-        $http.get($scope.serverUrl + '/api/getCurrentSession').then(function(res){
+        $http.get($scope.serverUrl + '/api/getCurrentSession?time='+new Date().getTime().toString()).then(function(res){
             if(res.data && res.data.origin1){
                 $scope.session = $scope.parseSession(res.data);
                 $scope.init();

@@ -8,7 +8,7 @@ var dev_only = true;
 
 // connection ports and addresses
 var SERVER_PORT = dev_only ? 80 : process.env.PORT || 3000;
-var REDIS_HOST = dev_only ? '192.168.1.2' : 'gas-cracker.isqbpv.ng.0001.apse2.cache.amazonaws.com';
+var REDIS_HOST = dev_only ? 'localhost' : 'gas-cracker.isqbpv.ng.0001.apse2.cache.amazonaws.com';
 
 
 var express = require('express');
